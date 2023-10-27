@@ -1,0 +1,51 @@
+---
+- name: Configure firewall (Debian and Ubuntu) TCP
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: tcp
+  with_items: "{{ allowed_tcp_ports }}"
+  when: ansible_os_family == 'Debian' and allowed_tcp_ports|length > 0
+
+- name: Configure firewall (Debian and Ubuntu) UDP
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+    proto: udp
+  with_items: "{{ allowed_udp_ports }}"
+  when: ansible_os_family == 'Debian' and allowed_udp_ports|length > 0
+
+- name: Configure default ufw policy
+  ufw:
+    direction: "{{ item.direction }}"
+    policy: "{{ item.policy }}"
+    state: enabled
+  with_items:
+  - { direction: outgoing, policy: allow }
+  - { direction: incoming, policy: deny }
+  when: ansible_os_family == 'Debian'
+
+- name: Enable ufw
+  ufw:
+    state: enabled
+  when: ansible_os_family == 'Ubuntu'
+
+- name: Configure firewall (CentOS) TCP
+  firewalld:
+    state: enabled
+    port: "{{ item }}/tcp"
+    zone: public
+    immediate: yes
+    permanent: yes
+  with_items: "{{ allowed_tcp_ports }}"
+  when: ansible_os_family == 'RedHat' and allowed_tcp_ports|length > 0
+
+- name: Configure firewall (CentOS) UDP
+  firewalld:
+    state: enabled
+    port: "{{ item }}/udp"
+    zone: public
+    immediate: yes
+    permanent: yes
+  with_items: "{{ allowed_udp_ports }}"
+  when: ansible_os_family == 'RedHat' and allowed_udp_ports|length > 0

@@ -1,0 +1,34 @@
+stages:
+  - "pre_check"
+  - "deploy"
+
+
+nginx_config_check:
+  stage: pre_check
+  rules:
+  - changes:
+    - "*.md"
+    when: never
+  - if: '$CI_COMMIT_REF_NAME == "main"'
+    when: always
+  script:
+    - echo $ANSIBLE_VAULT_PASSWORD > .vault_password.txt
+    - chmod 400 .vault_password.txt
+    - ansible-playbook -i inventory/inv.ini --vault-password-file .vault_password.txt main.yml --syntax-check
+  after_script:
+    - rm .vault_password.txt
+
+nginx_config_deploy:
+  stage: deploy
+  rules:
+  - changes:
+    - "*.md"
+    when: never
+  - if: '$CI_COMMIT_REF_NAME == "main"'
+    when: always
+  script:
+    - echo $ANSIBLE_VAULT_PASSWORD > .vault_password.txt
+    - chmod 400 .vault_password.txt
+    - ansible-playbook -i inventory/inv.ini --vault-password-file .vault_password.txt main.yml
+  after_script:
+    - rm .vault_password.txt
