@@ -3,7 +3,7 @@ stages:
   - "deploy"
 
 
-nginx_config_check:
+zabbix_config_check:
   stage: pre_check
   rules:
   - changes:
@@ -18,7 +18,7 @@ nginx_config_check:
   after_script:
     - rm .vault_password.txt
 
-nginx_config_deploy:
+zabbix_config_deploy:
   stage: deploy
   rules:
   - changes:
