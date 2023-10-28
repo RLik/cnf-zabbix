@@ -64,7 +64,11 @@ sudo apt install python3-pip python-setuptools virtualenv python3-psycopg2
 
 # Zabbix related configuration
 
+## Prepare configuration
 1. Change repo_download_url variable in file roles/zabbix/vars/main.yml to actual repo download URL.
 2. Create variable $PG_ZABBIX_USER_PWD in GitLab Project settings.
 3. Correct postgresql user name for zabbix (variable zabbix_db_user_name) in roles/zabbix/vars/main.yml if needed.
 3. Correct postgresql databse name for zabbix (variable zabbix_db_name) in roles/zabbix/vars/main.yml if needed.
+
+## Final step
+Go to configured URL ans complete setup.
