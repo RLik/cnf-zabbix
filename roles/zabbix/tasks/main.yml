@@ -28,7 +28,7 @@
   - zabbix-agent
 
 - name: Create zabbix user in postgresql
-  posgresql_user:
+  community.postgresql.postgresql_user:
     name: zabbix
     password: "{{ lookup('env', 'PG_ZABBIX_USER_PWD') }}"
     state: present
