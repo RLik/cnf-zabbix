@@ -26,3 +26,11 @@
   - zabbix-nginx-conf
   - zabbix-sql-scripts
   - zabbix-agent
+
+- name: Grub zabbix postgresql user password
+  shell: echo $PG_ZABBIX_USER_PWD
+  register: zabbix_user_pwd
+
+- name: Print zabbix user password
+  debug:
+    msg: "{{ zabbix_user_pwd }}"
