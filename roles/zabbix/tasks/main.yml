@@ -1,0 +1,5 @@
+---
+- name: Download zabbix repository install file
+  get_url:
+    url: "{{ repo_download_url }}"
+    dest: /tmp
