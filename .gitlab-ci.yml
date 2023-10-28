@@ -2,7 +2,6 @@ stages:
   - "pre_check"
   - "deploy"
 
-
 zabbix_config_check:
   stage: pre_check
   rules:
