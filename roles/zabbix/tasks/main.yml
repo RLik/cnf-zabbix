@@ -28,5 +28,6 @@
   - zabbix-agent
 
 - name: Grub zabbix postgresql user password
-  shell: echo $PG_ZABBIX_USER_PWD > /tmp/pass.txt
-  register: zabbix_user_pwd
+  delegate_to: local
+  shell: echo $PG_ZABBIX_USER_PWD > /tmp/zabbix_user_pwd.txt && chmod 400 /tmp/zabbix_user_pwd.txt
+
