@@ -41,6 +41,6 @@
 
 - name: Create zabbix database in postgresql
   community.postgresql.postgresql_db:
-    name: zabbix
+    name: "{{ zabbix_db_name }}"
     owner: zabbix
   become_user: postgres
