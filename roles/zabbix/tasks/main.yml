@@ -38,3 +38,9 @@
     password: "{{ lookup('env', 'PG_ZABBIX_USER_PWD') }}"
     state: present
   become_user: postgres
+
+- name: Create zabbix database in postgresql
+  community.postgresql.postgresql_db:
+    name: zabbix
+    owner: zabbix
+  become_user: postgres
