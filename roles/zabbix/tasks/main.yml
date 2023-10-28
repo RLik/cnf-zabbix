@@ -14,7 +14,15 @@
   apt:
     update_cache: yes
 
-- name: Install postgresql
+- name: Install required packages
   apt:
-    name: postgresql
+    name: "{{ item }}"
     state: present
+  with_items: 
+  - postgresql
+  - zabbix-server-pgsql
+  - zabbix-frontend-php
+  - php8.1-pgsql
+  - zabbix-nginx-conf
+  - zabbix-sql-scripts
+  - zabbix-agent
