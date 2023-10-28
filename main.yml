@@ -9,6 +9,7 @@
     - initial_setup
     - firewall_config
     - security_config
+    - zabbix
 
   pre_tasks:
   - name: Update apt cache if needed.
