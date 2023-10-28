@@ -1,6 +1,6 @@
-# Example of configuring Zabbix server from box
+# Example of configuring Zabbix server from box by GitLab pipeline
 
-I use this Ansile playbookas a base to configuring Zabbix server out of box for my labs. Playbook was tested on followins OS: Ubuntu Server 22.04.
+I use this Ansile playbookas a base to configuring Zabbix server out of box for my labs using GitLab pipeline. Playbook was tested on followins OS: Ubuntu Server 22.04.
 
 Configuration: Zabbix Server, Zabbix Frontend (nginx) and Zabbix database server (postgresql).
 
@@ -65,3 +65,4 @@ sudo apt install python3-pip python-setuptools virtualenv python3-psycopg2
 # Zabbix related configuration
 
 1. Change repo_download_url variable in file roles/zabbix/vars/main.yml to actual repo download URL.
+2. Create variable
