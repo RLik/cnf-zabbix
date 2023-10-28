@@ -27,7 +27,9 @@
   - zabbix-sql-scripts
   - zabbix-agent
 
-- name: Grub zabbix postgresql user password
-  delegate_to: localhost
-  shell: echo $PG_ZABBIX_USER_PWD > /tmp/zabbix_user_pwd.txt && chmod 400 /tmp/zabbix_user_pwd.txt
-
+- name: Create zabbix user in postgresql
+  posgresql_user:
+    name: zabbix
+    password: "{{ lookup('env', 'PG_ZABBIX_USER_PWD') }}"
+    state: present
+  become_user: postgres
