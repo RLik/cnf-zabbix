@@ -3,3 +3,18 @@
   get_url:
     url: "{{ repo_download_url }}"
     dest: /tmp
+    force: true
+  register: repo_file
+
+- name: Install Zabbix repository
+  apt:
+    deb: "{{ repo_file.dest }}"
+
+- name: Update apt cache if needed.
+  apt:
+    update_cache: yes
+
+- name: Install postgresql
+  apt:
+    name: postgresql
+    state: present

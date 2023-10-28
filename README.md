@@ -1,6 +1,8 @@
-# Example of configuring nginx server from box
+# Example of configuring Zabbix server from box
 
-I use this Ansile playbookas a base to configuring nginx server out of box for my labs. Playbook was tested on followins OS: Ubuntu Server 22.04, CentOS 7, CentOS 9 Stream.
+I use this Ansile playbookas a base to configuring Zabbix server out of box for my labs. Playbook was tested on followins OS: Ubuntu Server 22.04.
+
+Configuration: Zabbix Server, Zabbix Frontend (nginx) and Zabbix database server (postgresql).
 
 You can freely use this solution, but without any guarantee from the author.
 
@@ -55,3 +57,7 @@ sudo nano /etc/ansible/config/ssl/itproblog.ru.crt
 sudo chmod -R 650 /etc/ansible/config/
 sudo chown root:gitlab-runner -R /etc/ansible/config/
 ```
+
+# Zabbix related configuration
+
+1. Change repo_download_url variable in file roles/zabbix/vars/main.yml to actual repo download URL.
