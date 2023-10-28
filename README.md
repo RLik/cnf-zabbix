@@ -57,6 +57,11 @@ sudo nano /etc/ansible/config/ssl/itproblog.ru.crt
 sudo chmod -R 650 /etc/ansible/config/
 sudo chown root:gitlab-runner -R /etc/ansible/config/
 ```
+- [ ] Install additional packages for work with postgresql_db Ansible module on host with Ansible and gitlab runner. In my case this is GitLab server host.
+```
+sudo apt install python3-pip python-setuptools virtualenv
+sudo pip install psycopg2-binary
+```
 
 # Zabbix related configuration
 
