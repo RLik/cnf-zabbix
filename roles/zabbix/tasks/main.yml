@@ -27,9 +27,14 @@
   - zabbix-sql-scripts
   - zabbix-agent
 
+- name: install acl for work with setfacl (need for postgresql Ansible module)
+  apt:
+    name: acl
+    state: present
+
 - name: Create zabbix user in postgresql
   community.postgresql.postgresql_user:
-    name: zabbix
+    name: "{{ zabbix_db_user_name }}"
     password: "{{ lookup('env', 'PG_ZABBIX_USER_PWD') }}"
     state: present
   become_user: postgres
