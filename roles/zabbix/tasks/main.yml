@@ -46,15 +46,13 @@
   become_user: postgres
 
 - name: Extract zabbix schema database
-  command: gunzip /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+  command: gunzip -k /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
   register: zabbix_schema_file
 
-- name: Print extract info
-  debug:
-    msg: "{{ zabbix_schema_file }}"
 
 - name: Restore database
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
+    login_host: 127.0.0.1
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
