@@ -53,7 +53,7 @@
     name: "{{ zabbix_db_name }}"
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
-  become_user: postgres
+  become_user: zabbix
 
 - name: Copy config files
   template:
