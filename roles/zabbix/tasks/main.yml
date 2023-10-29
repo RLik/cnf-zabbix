@@ -69,7 +69,7 @@
   service:
     name: "{{ item }}"
     state: started
-    enable: yes
+    enabled: yes
   with_items:
   - zabbix-server
   - zabbix-agent
