@@ -53,6 +53,6 @@
 - name: Restore database
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
-    login_host: 127.0.0.1
+    login_host: zabbix
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
