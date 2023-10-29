@@ -44,3 +44,9 @@
     name: "{{ zabbix_db_name }}"
     owner: zabbix
   become_user: postgres
+
+- name: Restore database
+  community.postgresql.postgresql_db:
+    name: "{{ zabbix_db_name }}"
+    state: restore
+    target: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
