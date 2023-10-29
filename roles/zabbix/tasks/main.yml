@@ -53,7 +53,14 @@
     name: "{{ zabbix_db_name }}"
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
-  become_user: zabbix
+  become_user: postgres
+
+- name: GRANT ALL PRIVILEGES ON DATABASE zabbix TO zabbix user
+  community.postgresql.postgresql_privs:
+    db: zabbix
+    privs: ALL
+    type: database
+    role: zabbix
 
 - name: Copy config files
   template:
