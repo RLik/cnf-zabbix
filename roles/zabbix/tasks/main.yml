@@ -54,3 +54,23 @@
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
   become_user: postgres
+
+- name: Copy config files
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+  with_items:
+  - { src: zabbix_server.conf.j2, dest: /etc/zabbix/zabbix_server.conf }  
+  - { src: nginx.conf.j2, dest: /etc/zabbix/nginx.conf }  
+  notify: Restart Zabbix
+
+- name: Enable services
+  service:
+    name: "{{ item }}"
+    state: enabled
+  with_items:
+  - zabbix-server
+  - zabbix-agent
+  - nginx
+  - php8.1-fpm
