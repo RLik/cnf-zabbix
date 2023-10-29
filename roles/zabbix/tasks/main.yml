@@ -49,7 +49,12 @@
   ansible.builtin.unarchive:
     src: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
     remote_src: true
-    dest: /tmp/zabbix.sql
+    dest: /tmp
+  register: zabbix_schema_file
+
+- name: Print extract info
+  debug:
+    msg: "{{ zabbix_schema_file }}"
 
 - name: Restore database
   community.postgresql.postgresql_db:
