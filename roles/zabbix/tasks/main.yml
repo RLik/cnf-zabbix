@@ -45,8 +45,13 @@
     owner: zabbix
   become_user: postgres
 
+- name: Extract zabbix schema database
+  ansible.builtin.unarchive:
+    src: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+    dest: /tmp/zabbix.sql
+
 - name: Restore database
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
     state: restore
-    target: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+    target: /tmp/zabbix.sql
