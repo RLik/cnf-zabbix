@@ -61,6 +61,7 @@
     privs: ALL
     type: database
     role: zabbix
+  become_user: postgres
 
 - name: Copy config files
   template:
