@@ -47,7 +47,8 @@
 
 - name: Extract zabbix schema database
   ansible.builtin.unarchive:
-    remote_src: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+    src: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+    remote_src: true
     dest: /tmp/zabbix.sql
 
 - name: Restore database
