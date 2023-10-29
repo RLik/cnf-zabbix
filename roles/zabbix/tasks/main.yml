@@ -54,6 +54,6 @@
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
     login_host: 127.0.0.1
-    force: true
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
+  become_user: postgres
