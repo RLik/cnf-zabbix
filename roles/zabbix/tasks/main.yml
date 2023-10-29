@@ -46,10 +46,7 @@
   become_user: postgres
 
 - name: Extract zabbix schema database
-  ansible.builtin.unarchive:
-    src: /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
-    remote_src: true
-    dest: /tmp
+  command: gunzip /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
   register: zabbix_schema_file
 
 - name: Print extract info
@@ -60,4 +57,4 @@
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
     state: restore
-    target: /tmp/zabbix.sql
+    target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
