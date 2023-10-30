@@ -85,4 +85,4 @@ sudo chown root:gitlab-runner -R /etc/ansible/config/
 5. If you need HTTPS set enable_ssl to "true" in roles/zabbix/vars/main.yml and specify SSL cert and key file location on ansible server in vars: ssl_certificate_key_path and ssl_certificate_path
 
 ## Final step
-Go to configured URL ans complete setup.
+Go to configured hostname (variable server_name n roles/zabbix/vars/main.yml) and complete setup.
