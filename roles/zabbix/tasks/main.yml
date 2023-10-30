@@ -61,7 +61,7 @@
   file:
     path: /etc/zabbix/ssl
     state: directory
-  when: enable_ssl == "true"
+  when: enable_ssl == true
 
 - name: Copy certificate and key
   copy:
@@ -71,7 +71,7 @@
   with_items:
     - { src: '/etc/ansible/config/ssl/itproblog.ru.crt', dest: "{{ ssl_certificate_path }}" }
     - { src: '/etc/ansible/config/ssl/itproblog.ru.key', dest: "{{ ssl_certificate_key_path }}" }
-  when: enable_ssl == "true"
+  when: enable_ssl == true
 
 - name: Enable services
   service:
