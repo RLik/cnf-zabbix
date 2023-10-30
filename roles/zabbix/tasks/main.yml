@@ -1,5 +1,5 @@
 ---
-- name: Stats
+- name: Check if zabbix repo file exists
   stat:
     path: /etc/apt/sources.list.d/zabbix.list
   register: apt_zabbix_repo
@@ -93,3 +93,9 @@
   - zabbix-agent
   - nginx
   - php8.1-fpm
+
+- name: config zabbix user permission for running nmap and other tools on zabbix server
+  lineinfile:
+    regex: ^#?zabbix ALL=\(ALL\) NOPASSWD:\/usr\/bin\/nmap$
+    line: zabbix ALL=(ALL) NOPASSWD:/usr/bin/nmap
+    path: /etc/sudoers
