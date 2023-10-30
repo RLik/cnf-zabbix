@@ -45,31 +45,34 @@
     owner: zabbix
   become_user: postgres
 
-- name: Reassign all object in database zabbix
-  postgresql_owner:
-    db: zabbix
-    new_owner: zabbix
-    obj_type: database
-  become_user: postgres
+- name: Restore zabbix database schema
+  shell: sudo zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql zabbix
 
-- name: Extract zabbix schema database
-  command: gunzip -kf /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
+# - name: Reassign all object in database zabbix
+#   postgresql_owner:
+#     db: zabbix
+#     new_owner: zabbix
+#     reassign_owned_by: postgres
+#   become_user: postgres
 
-- name: Restore database
-  community.postgresql.postgresql_db:
-    name: "{{ zabbix_db_name }}"
-    state: restore
-    target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
-    owner: zabbix
-  become_user: postgres
+# - name: Extract zabbix schema database
+#   command: gunzip -kf /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
 
-- name: GRANT ALL PRIVILEGES ON DATABASE zabbix TO zabbix user
-  community.postgresql.postgresql_privs:
-    db: zabbix
-    privs: ALL
-    type: database
-    role: zabbix
-  become_user: postgres
+# - name: Restore database
+#   community.postgresql.postgresql_db:
+#     name: "{{ zabbix_db_name }}"
+#     state: restore
+#     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
+#     owner: zabbix
+#   become_user: postgres
+
+# - name: GRANT ALL PRIVILEGES ON DATABASE zabbix TO zabbix user
+#   community.postgresql.postgresql_privs:
+#     db: zabbix
+#     privs: ALL
+#     type: database
+#     role: zabbix
+#   become_user: postgres
 
 - name: Copy config files
   template:
