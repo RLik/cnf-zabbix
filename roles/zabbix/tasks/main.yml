@@ -49,6 +49,7 @@
     db: zabbix
     new_owner: zabbix
     obj_type: database
+  become_user: postgres
 
 - name: Extract zabbix schema database
   command: gunzip -kf /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
