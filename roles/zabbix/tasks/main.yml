@@ -57,6 +57,22 @@
   - { src: nginx.conf.j2, dest: /etc/zabbix/nginx.conf }  
   notify: Restart Zabbix
 
+- name: Create directory for ssl certs
+  file:
+    path: /etc/zabbix/ssl
+    state: directory
+  when: enable_ssl == "true"
+
+- name: Copy certificate and key
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    force: true
+  with_items:
+    - { src: '/etc/ansible/config/ssl/itproblog.ru.crt', dest: "{{ ssl_certificate_path }}" }
+    - { src: '/etc/ansible/config/ssl/itproblog.ru.key', dest: "{{ ssl_certificate_key_path }}" }
+  when: enable_ssl == "true"
+
 - name: Enable services
   service:
     name: "{{ item }}"

@@ -61,6 +61,18 @@ sudo chown root:gitlab-runner -R /etc/ansible/config/
 ```
 sudo apt install python3-pip python-setuptools virtualenv python3-psycopg2
 ```
+- [ ] (Optional) Create directory for storing SSL cert and keys files. Add contents of SSL crt and ke files (or just copy this files to server):
+```
+sudo mkdir -p /etc/ansible/config/ssl
+sudo nano /etc/ansible/config/ssl/itproblog.ru.key
+sudo nano /etc/ansible/config/ssl/itproblog.ru.crt
+```
+
+- [ ] (Optional)  Give rights to read SSL cert and keys files only to root and gitlab-runner users:
+```
+sudo chmod -R 650 /etc/ansible/config/
+sudo chown root:gitlab-runner -R /etc/ansible/config/
+```
 
 # Zabbix related configuration
 
@@ -70,6 +82,7 @@ sudo apt install python3-pip python-setuptools virtualenv python3-psycopg2
 3. Correct postgresql user name for zabbix (variable zabbix_db_user_name) in roles/zabbix/vars/main.yml if needed.
 3. Correct postgresql databse name for zabbix (variable zabbix_db_name) in roles/zabbix/vars/main.yml if needed.
 4. Correct server_name variable in roles/zabbix/vars/main.yml. Specify name by which Zabbix server will be available.
+5. If you need HTTPS set enable_ssl to "true" in roles/zabbix/vars/main.yml and specify SSL cert and key file location on ansible server in vars: ssl_certificate_key_path and ssl_certificate_path
 
 ## Final step
 Go to configured URL ans complete setup.
