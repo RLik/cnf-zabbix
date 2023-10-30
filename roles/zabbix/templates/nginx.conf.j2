@@ -1,7 +1,15 @@
 server {
             listen          80;
+            listen          443 ssl;
             server_name     {{ server_name }};
-    
+
+            ssl_certificate     {{ ssl_certificate_path }};
+            ssl_certificate_key {{ ssl_certificate_key_path }};
+
+            if ($scheme != "https") {
+                return 301 https://$host$request_uri;
+            }
+                
             root    /usr/share/zabbix;
     
             index   index.php;
