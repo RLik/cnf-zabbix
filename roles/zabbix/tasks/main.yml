@@ -43,7 +43,7 @@
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
     owner: zabbix
-  become_user: zabbix
+  become_user: postgres
 
 - name: Reassign all object in database zabbix
   postgresql_owner:
@@ -60,6 +60,7 @@
     name: "{{ zabbix_db_name }}"
     state: restore
     target: /usr/share/zabbix-sql-scripts/postgresql/server.sql
+    owner: zabbix
   become_user: postgres
 
 - name: GRANT ALL PRIVILEGES ON DATABASE zabbix TO zabbix user
