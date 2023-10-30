@@ -1,17 +1,25 @@
 ---
-# - name: Download zabbix repository install file
-#   get_url:
-#     url: "{{ repo_download_url }}"
-#     dest: /tmp
-#     force: true
+- name: Stats
+  stat:
+    path: /etc/apt/sources.list.d/zabbix.list
+  register: apt_zabbix_repo
 
-# - name: Install Zabbix repository
-#   apt:
-#     deb: "{{ repo_file.dest }}"
+- name: Download zabbix repository install file
+  get_url:
+    url: "{{ repo_download_url }}"
+    dest: /tmp
+    force: true
+  when: not apt_zabbix_repo.stat.exists
 
-# - name: Update apt cache if needed.
-#   apt:
-#     update_cache: yes
+- name: Install Zabbix repository
+  apt:
+    deb: "{{ repo_file.dest }}"
+  when: not apt_zabbix_repo.stat.exists
+
+- name: Update apt cache if needed.
+  apt:
+    update_cache: yes
+  when: not apt_zabbix_repo.stat.exists
 
 - name: Install required packages for Zabbix server
   apt:
@@ -25,6 +33,8 @@
   - zabbix-nginx-conf
   - zabbix-sql-scripts
   - zabbix-agent
+  - traceroute
+  - nmap
 
 - name: install acl for work with setfacl (need for postgresql Ansible module)
   apt:
@@ -71,7 +81,7 @@
   with_items:
     - { src: '/etc/ansible/config/ssl/itproblog.ru.crt', dest: "{{ ssl_certificate_path }}" }
     - { src: '/etc/ansible/config/ssl/itproblog.ru.key', dest: "{{ ssl_certificate_key_path }}" }
-  when: enable_ssl
+  when: enable_ssl == true
 
 - name: Enable services
   service:
