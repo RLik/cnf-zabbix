@@ -42,8 +42,13 @@
 - name: Create zabbix database in postgresql
   community.postgresql.postgresql_db:
     name: "{{ zabbix_db_name }}"
-    owner: zabbix
   become_user: postgres
+
+- name: Reassign all object in database zabbix
+  postgresql_owner:
+    db: zabbix
+    new_owner: zabbix
+    obj_type: database
 
 - name: Extract zabbix schema database
   command: gunzip -kf /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz
