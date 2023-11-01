@@ -3,6 +3,7 @@ allowed_tcp_ports:
   - 22
   - 80
   - 443
+  - 10051
 
 allowed_udp_ports: []
 
