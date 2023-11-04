@@ -35,6 +35,7 @@
   - zabbix-agent
   - traceroute
   - nmap
+  - snmp
 
 - name: install acl for work with setfacl (need for postgresql Ansible module)
   apt:
