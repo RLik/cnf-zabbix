@@ -7,12 +7,24 @@
     - musl
     state: present
 
+- name: Check if Grafana is installed
+  command: dpkg-query -W grafana-enterprise_10.0.0_amd64
+  register: grafana_package_check
+  failed_when: grafana_package_check.rc > 1
+  changed_when: grafana_package_check.rc == 1
+
 - name: Download distributin file
   get_url:
     url: "{{ grafana_source_url }}"
     dest: /tmp
   register: source_file
+  when: grafana_package_check.rc == 1
 
 - name: Print source_file
   debug:
     msg: "{{ source_file }}"
+
+- name: Install Grafana package
+  apt: deb="{{ source_file.dest }}"
+  sudo: true
+  when: grafana_package_check.rc == 1
