@@ -26,5 +26,4 @@
 
 - name: Install Grafana package
   apt: deb="{{ source_file.dest }}"
-  sudo: true
   when: grafana_package_check.rc == 1
