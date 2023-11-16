@@ -9,7 +9,7 @@
 
 - name: Download distributin file
   get_url:
-    url: wget "{{ grafana_source_url }}"
+    url: "{{ grafana_source_url }}"
     dest: /tmp
   register: source_file
 
