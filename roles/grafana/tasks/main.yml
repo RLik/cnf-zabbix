@@ -1,0 +1,18 @@
+---
+- name: Install required packages
+  package:
+    name:
+    - adduser
+    - libfontconfig1
+    - musl
+    state: present
+
+- name: Download distributin file
+  get_url:
+    url: wget "{{ grafana_source_url }}"
+    dest: /tmp
+  register: source_file
+
+- name: Print source_file
+  debug:
+    msg: "{{ source_file }}"

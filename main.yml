@@ -10,6 +10,7 @@
     - firewall_config
     - security_config
     - zabbix
+    - grafana
 
   pre_tasks:
   - name: Update apt cache if needed.
