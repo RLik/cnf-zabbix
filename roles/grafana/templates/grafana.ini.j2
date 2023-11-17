@@ -64,8 +64,8 @@ protocol = https
 ;enable_gzip = false
 
 # https certs & key file
-cert_file = "{{ ssl_certificate_path }}"
-cert_key = "{{ ssl_certificate_key_path }}"
+cert_file = {{ ssl_certificate_path }}
+cert_key = {{ ssl_certificate_key_path }}
 
 # Unix socket gid
 # Changing the gid of a file without privileges requires that the target group is in the group of the process and that the process is the file owner
