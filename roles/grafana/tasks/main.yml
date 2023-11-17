@@ -8,7 +8,7 @@
     state: present
 
 - name: Check if Grafana is installed
-  command: dpkg-query -W "{{ grafana_package_name }}"
+  command: dpkg-query -W grafana-enterprise
   register: grafana_package_check
   failed_when: grafana_package_check.rc > 1
   changed_when: grafana_package_check.rc == 1
