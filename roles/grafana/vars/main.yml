@@ -1,4 +1,9 @@
 ---
+# URL from which you can download install package. You can get URL on this page - https://grafana.com/grafana/download
 grafana_source_url: https://dl.grafana.com/enterprise/release/grafana-enterprise_10.0.0_amd64.deb
+
+# Path on Zabbix server to which copy public key file
 ssl_certificate_path: '/etc/zabbix/ssl/itproblog.ru.crt'
+
+# Path on Zabbix server to which copy private key file
 ssl_certificate_key_path: '/etc/zabbix/ssl/itproblog.ru.key'

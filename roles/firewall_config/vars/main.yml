@@ -1,4 +1,5 @@
 ---
+# List of allowed TCP ports
 allowed_tcp_ports:
   - 22
   - 80
@@ -6,5 +7,5 @@ allowed_tcp_ports:
   - 10051
   - 3000
 
+# List of allowed UDP ports
 allowed_udp_ports: []
-
