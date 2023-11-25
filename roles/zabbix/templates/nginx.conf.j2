@@ -2,7 +2,7 @@ server {
             listen          80;
             server_name     {{ server_name }};
 
-            {% if {{ enable_ssl }} %}
+            {% if enable_ssl %}
             listen              443 ssl;
             ssl_certificate     {{ ssl_certificate_path }};
             ssl_certificate_key {{ ssl_certificate_key_path }};
