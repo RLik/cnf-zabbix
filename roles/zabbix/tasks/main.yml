@@ -100,3 +100,8 @@
     regex: ^#?zabbix ALL=\(ALL\) NOPASSWD:\/usr\/bin\/nmap$
     line: zabbix ALL=(ALL) NOPASSWD:/usr/bin/nmap
     path: /etc/sudoers
+
+- name: Restart Zabbix server
+  service:
+    name: zabbix-server
+    state: restarted
