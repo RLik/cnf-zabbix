@@ -13,6 +13,12 @@ server_name: zabbix.itproblog.ru
 # If ssl is required than set "true". Otherwise set "false"
 enable_ssl: true
 
+# Path on GitLab server from which copy public key file
+ssl_certificate_path_source: '/etc/ansible/config/ssl/itproblog.ru.crt'
+
+# Path on GitLab server from which copy private key file
+ssl_certificate_key_path_source: '/etc/ansible/config/ssl/itproblog.ru.key'
+
 # Path on Zabbix server to which copy public key file
 ssl_certificate_path: '/etc/zabbix/ssl/itproblog.ru.crt'
 
