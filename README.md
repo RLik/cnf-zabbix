@@ -14,7 +14,7 @@ I use GitLab CE server with local shell agent and Ansible installed. GitLab runn
 
 - [ ] Switch to gitlab-runner user context:
 ```
- sudo su - gitlab-runner
+sudo su - gitlab-runner
 ```
 - [ ] Generate SSH keys if they wasn't generated early:
 ```
@@ -45,30 +45,18 @@ sudo chmod 650 /etc/ansible/vault/
 ```
 
 - [ ] In GitLab Project settings add variale named $ANSIBLE_VAULT_PASSWORD and in value part specify password that you've use to encrype nginx.yml file by Ansible Vault.
-- [ ] Create directory for storing SSL cert and keys files. Add contents of SSL crt and ke files (or just copy this files to server):
-```
-sudo mkdir -p /etc/ansible/config/ssl
-sudo nano /etc/ansible/config/ssl/itproblog.ru.key
-sudo nano /etc/ansible/config/ssl/itproblog.ru.crt
-```
-
-- [ ] Give rights to read SSL cert and keys files only to root and gitlab-runner users:
-```
-sudo chmod -R 650 /etc/ansible/config/
-sudo chown root:gitlab-runner -R /etc/ansible/config/
-```
 - [ ] Install additional packages for work with postgresql_db Ansible module on host with Ansible and gitlab runner. In my case this is GitLab server host.
 ```
 sudo apt install python3-pip python-setuptools virtualenv python3-psycopg2
 ```
-- [ ] (Optional) Create directory for storing SSL cert and keys files. Add contents of SSL crt and ke files (or just copy this files to server):
+- [ ] (Optional if ssl required) Create directory for storing SSL cert and keys files. Add contents of SSL crt and ke files (or just copy this files to server):
 ```
 sudo mkdir -p /etc/ansible/config/ssl
 sudo nano /etc/ansible/config/ssl/itproblog.ru.key
 sudo nano /etc/ansible/config/ssl/itproblog.ru.crt
 ```
 
-- [ ] (Optional)  Give rights to read SSL cert and keys files only to root and gitlab-runner users:
+- [ ] (Optional if ssl required) Give rights to read SSL cert and keys files only to root and gitlab-runner users:
 ```
 sudo chmod -R 650 /etc/ansible/config/
 sudo chown root:gitlab-runner -R /etc/ansible/config/

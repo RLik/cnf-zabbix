@@ -10,7 +10,7 @@ zabbix_db_name: zabbix
 # Domain name which will be configured as virtual host on nginx server. Zabbix server GUI will be available at this name.
 server_name: zabbix.itproblog.ru
 
-# 
+# If ssl is required than set "true". Otherwise set "false"
 enable_ssl: true
 
 # Path on Zabbix server to which copy public key file
