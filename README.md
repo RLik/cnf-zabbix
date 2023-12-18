@@ -70,7 +70,7 @@ sudo chown root:gitlab-runner -R /etc/ansible/config/
 3. Correct postgresql user name for zabbix (variable zabbix_db_user_name) in roles/zabbix/vars/main.yml if needed.
 3. Correct postgresql databse name for zabbix (variable zabbix_db_name) in roles/zabbix/vars/main.yml if needed.
 4. Correct server_name variable in roles/zabbix/vars/main.yml. Specify name by which Zabbix server will be available.
-5. If you need HTTPS set enable_ssl to "true" in roles/zabbix/vars/main.yml and specify SSL cert and key file location on ansible server in vars: ssl_certificate_key_path and ssl_certificate_path
+5. If you need HTTPS set enable_ssl to "true" in roles/zabbix/vars/main.yml and specify SSL cert and key file location on ansible and Zabbix server in vars: ssl_certificate_key_path_source, ssl_certificate_path_source, ssl_certificate_key_path and ssl_certificate_path
 
 ## Final step
 Go to configured hostname (variable server_name n roles/zabbix/vars/main.yml) and complete setup.

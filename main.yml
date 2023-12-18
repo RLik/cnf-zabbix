@@ -3,7 +3,7 @@
   become: true
 
   vars_files:
-    - /etc/ansible/vault/nginx.yml
+    - /etc/ansible/vault/zabbix.yml
   
   roles:
     - initial_setup

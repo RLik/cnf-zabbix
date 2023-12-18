@@ -10,6 +10,8 @@
     dest: /tmp
     force: true
   when: not apt_zabbix_repo.stat.exists
+  register: repo_file
+
 
 - name: Install Zabbix repository
   apt:
@@ -36,6 +38,11 @@
   - traceroute
   - nmap
   - snmp
+  - python3-pip
+  - libpq-dev
+
+- name: Install Python module
+  shell: python3 -m pip install psycopg2
 
 - name: install acl for work with setfacl (need for postgresql Ansible module)
   apt:
@@ -80,8 +87,8 @@
     dest: "{{ item.dest }}"
     force: true
   with_items:
-    - { src: '/etc/ansible/config/ssl/itproblog.ru.crt', dest: "{{ ssl_certificate_path }}" }
-    - { src: '/etc/ansible/config/ssl/itproblog.ru.key', dest: "{{ ssl_certificate_key_path }}" }
+    - { src: "{{ ssl_certificate_path_source }}", dest: "{{ ssl_certificate_path }}" }
+    - { src: "{{ ssl_certificate_key_path_source }}", dest: "{{ ssl_certificate_key_path }}" }
   when: enable_ssl == true
 
 - name: Enable services
